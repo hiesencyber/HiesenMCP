@@ -1,0 +1,35 @@
+{
+  "category_name": "Computer Forensics",
+  "tools": [
+    {
+      "name": "The Sleuth Kit/Autopsy",
+      "description": "Digital forensics platform."
+    },
+    {
+      "name": "Volatility",
+      "description": "Memory forensics framework."
+    },
+    {
+      "name": "FTK Imager",
+      "description": "Data preview and imaging tool."
+    },
+    {
+      "name": "Redline",
+      "description": "Incident response tool from FireEye."
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "hiesen-forensics-testing-001",
+      "title": "Memory Analysis (Volatility)",
+      "description": "Analyze a memory dump for running processes, network connections, etc.",
+      "tools": [
+        "vol.py"
+      ],
+      "steps": [
+        "Command: `vol.py -f <memory_dump.vmem> --profile=<profile> pslist`"
+      ],
+      "mcp_tools": []
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+    "mcpServers": {
+        "HiesenMCP": {
+            "command": "python3",
+            "args": [
+                "<your-client-location>/HiesenMCPclient.py",
+                "--server",
+                "http://localhost:1337"
+            ]
+        }
+    }
+}

@@ -1,0 +1,115 @@
+{
+  "category_name": "API Security Assessment",
+  "tools": [
+    {
+      "name": "Postman",
+      "description": "API development and testing platform."
+    },
+    {
+      "name": "Burp Suite/OWASP ZAP",
+      "description": "As above."
+    },
+    {
+      "name": "Kiterunner",
+      "description": "API endpoint scanner."
+    },
+    {
+      "name": "jwt_tool",
+      "description": "JWT (JSON Web Token) testing tool."
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "hiesen-api-testing-001",
+      "title": "Broken Object Level Authorization (BOLA)",
+      "description": "Try to access an object you don't own by changing the ID in the URL (e.g., `/api/users/123` to `/api/users/456`).",
+      "tools": [],
+      "steps": [],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-api-testing-002",
+      "title": "JWT Signature Bypass",
+      "description": "Change the JWT algorithm to `none` and remove the signature.",
+      "tools": [
+        "jwt_tool"
+      ],
+      "steps": [
+        "Command (using jwt_tool): `jwt_tool 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' -X a`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-api-testing-003",
+      "title": "API endpoint discovery and documentation drift",
+      "description": "Compare live endpoints against documentation/OpenAPI specs to uncover shadow APIs and deprecated methods.",
+      "tools": [
+        "Kiterunner",
+        "Burp Suite",
+        "ffuf"
+      ],
+      "steps": [
+        "Gather any OpenAPI/Swagger definitions and import into Burp or Postman.",
+        "Run Kiterunner/ffuf wordlists against `/-/`, `/v1/`, `/beta/` to find undocumented paths or methods.",
+        "Diff responses and authentication requirements to identify drift from the published contract.",
+        "Recommend aligning documentation with deployment and disabling legacy routes."
+      ],
+      "mcp_tools": [
+        "ffuf"
+      ]
+    },
+    {
+      "id": "hiesen-api-testing-004",
+      "title": "Mass assignment / JSON parameter tampering",
+      "description": "Probe JSON bodies for writable fields that should remain server-controlled (roles, pricing, flags).",
+      "tools": [
+        "Burp Suite",
+        "Postman"
+      ],
+      "steps": [
+        "Review responses for hidden properties (e.g., `isAdmin`, `price`, `status`).",
+        "Send these properties back in create/update requests to test if the server honors them.",
+        "Observe for privilege escalation or business-logic abuse.",
+        "Recommend whitelisting allowed properties and using DTO validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-api-testing-005",
+      "title": "API rate limiting and replay gaps",
+      "description": "Evaluate throttling, burst handling, and nonce requirements for sensitive endpoints (login, password reset, financial ops).",
+      "tools": [
+        "Hydra",
+        "Burp Intruder"
+      ],
+      "steps": [
+        "Send rapid bursts of requests with varying identifiers to detect per-IP vs per-account enforcement.",
+        "Replay signed requests or OTP submissions to verify nonce enforcement.",
+        "Note any 429 bypass via headers (X-Forwarded-For) or HTTP/2 multiplexing.",
+        "Recommend consistent throttling and cryptographic nonces."
+      ],
+      "mcp_tools": [
+        "hydra"
+      ]
+    },
+    {
+      "id": "hiesen-api-testing-006",
+      "title": "Server-side request forgery in API integrations",
+      "description": "Inspect webhook, URL preview, and import features for SSRF into cloud metadata/management endpoints.",
+      "tools": [
+        "Burp Suite",
+        "ffuf",
+        "aws metadata wordlist"
+      ],
+      "steps": [
+        "Identify parameters accepting URLs (webhooks, importers, screenshot APIs).",
+        "Send payloads targeting cloud metadata services (`http://169.254.169.254/`) or internal admin consoles.",
+        "Monitor for timeouts, DNS callbacks, or leaked data in responses/logs.",
+        "Recommend allowlists and layered egress controls."
+      ],
+      "mcp_tools": [
+        "ffuf"
+      ]
+    }
+  ]
+}

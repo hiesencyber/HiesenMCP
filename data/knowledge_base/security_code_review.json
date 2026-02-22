@@ -1,0 +1,117 @@
+{
+  "category_name": "Security Code Review",
+  "tools": [
+    {
+      "name": "SonarQube",
+      "description": "Static code analysis platform."
+    },
+    {
+      "name": "Bandit",
+      "description": "Python code analyzer."
+    },
+    {
+      "name": "Semgrep",
+      "description": "Lightweight static analysis tool."
+    },
+    {
+      "name": "Manual Review",
+      "description": "The most important tool!"
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "hiesen-code-testing-001",
+      "title": "Hardcoded Secrets",
+      "description": "Search the codebase for keywords like `password`, `api_key`, `secret`.",
+      "tools": [
+        "grep"
+      ],
+      "steps": [
+        "Command (using grep): `grep -r -i \\\"password\\\" .`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-code-testing-002",
+      "title": "Insecure Deserialization",
+      "description": "Look for use of `pickle` in Python, `ObjectInputStream` in Java, etc.",
+      "tools": [],
+      "steps": [],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-code-testing-003",
+      "title": "Semgrep Scan",
+      "description": "Run Semgrep with a specific configuration to find vulnerabilities.",
+      "tools": [
+        "Semgrep"
+      ],
+      "steps": [
+        "Command: `semgrep --json --output /tmp/semgrep_results.json --config=p/python .`"
+      ],
+      "mcp_tools": [
+        "semgrep"
+      ]
+    },
+    {
+      "id": "hiesen-code-testing-004",
+      "title": "Bandit Scan",
+      "description": "Run Bandit to find common security issues in Python code.",
+      "tools": [
+        "Bandit"
+      ],
+      "steps": [
+        "Command: `bandit -r -f json -o /tmp/bandit_results.json .`"
+      ],
+      "mcp_tools": [
+        "bandit"
+      ]
+    },
+    {
+      "id": "hiesen-code-testing-005",
+      "title": "Insecure randomness / predictable tokens",
+      "description": "Identify use of non-cryptographic RNGs for session IDs, password reset tokens, or crypto keys.",
+      "tools": [
+        "Manual Review"
+      ],
+      "steps": [
+        "Search for usages of `rand()`, `Random()`, `Math.random()`, or timestamps assigned to security tokens.",
+        "Trace code to see if outputs are used for session identifiers, password reset links, or crypto keys.",
+        "Recommend cryptographically secure RNGs (e.g., `secrets` in Python, `SecureRandom` in Java)."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-code-testing-006",
+      "title": "Server-side request forgery sinks in code",
+      "description": "Review code for HTTP client usage that fetches user-provided URLs without allowlists or validation.",
+      "tools": [
+        "Manual Review",
+        "Semgrep"
+      ],
+      "steps": [
+        "Locate wrappers around `requests.get`, `HttpClient`, `URL.openStream`, etc., where parameters originate from user input.",
+        "Check for SSRF mitigations (allowlists, IP blocking, DNS pinning).",
+        "Flag missing validations and suggest canonicalization plus network-layer egress controls."
+      ],
+      "mcp_tools": [
+        "semgrep"
+      ]
+    },
+    {
+      "id": "hiesen-code-testing-007",
+      "title": "Sensitive logging and tracing",
+      "description": "Ensure logs do not store secrets (passwords, tokens, PII) or stack traces in production builds.",
+      "tools": [
+        "Manual Review",
+        "grep"
+      ],
+      "steps": [
+        "Search for logging statements referencing `password`, `Authorization`, or entire request bodies.",
+        "Review exception handlers to verify stack traces are sanitized before reaching logs/users.",
+        "Recommend structured logging with redaction and environment-based log levels."
+      ],
+      "mcp_tools": []
+    }
+  ]
+}

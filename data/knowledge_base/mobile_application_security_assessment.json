@@ -1,0 +1,172 @@
+{
+  "category_name": "Mobile Application Security Assessment",
+  "tools": [
+    {
+      "name": "JADX-GUI",
+      "description": "DEX to Java decompiler.",
+      "platform": "Android"
+    },
+    {
+      "name": "Frida",
+      "description": "Dynamic instrumentation toolkit for Android/iOS.",
+      "platform": "Android/iOS"
+    },
+    {
+      "name": "Drozer",
+      "description": "Security testing framework for Android.",
+      "platform": "Android"
+    },
+    {
+      "name": "Objection",
+      "description": "Runtime mobile exploration toolkit, powered by Frida.",
+      "platform": "Android/iOS"
+    },
+    {
+      "name": "Cycript",
+      "description": "Explore and modify running applications on iOS.",
+      "platform": "iOS"
+    },
+    {
+      "name": "Needle",
+      "description": "iOS security testing framework.",
+      "platform": "iOS"
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "hiesen-mobile-testing-001",
+      "title": "Insecure Data Storage (Android)",
+      "description": "Check for sensitive data in `SharedPreferences`, SQLite databases, or external storage.",
+      "tools": [],
+      "steps": [
+        "Command (using adb): `adb shell \"run-as com.example.app ls -l /data/data/com.example.app/shared_prefs\"`"
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-mobile-testing-002",
+      "title": "Certificate Pinning Bypass (using Objection)",
+      "description": "Bypass SSL pinning to intercept HTTPS traffic.",
+      "tools": [
+        "Objection"
+      ],
+      "steps": [
+        "Command: `objection --gadget \"com.example.app\" explore -s \"android sslpinning disable\"`"
+      ],
+      "mcp_tools": [
+        "objection_run"
+      ]
+    },
+    {
+      "id": "hiesen-mobile-testing-003",
+      "title": "Dynamic Analysis with Frida",
+      "description": "Hook into application functions to observe runtime behavior.",
+      "tools": [
+        "Frida"
+      ],
+      "steps": [
+        "Command: `frida -l my_script.js -f com.example.app --no-pause`"
+      ],
+      "mcp_tools": [
+        "frida_run"
+      ]
+    },
+    {
+      "id": "hiesen-mobile-testing-004",
+      "title": "Android Component Enumeration with Drozer",
+      "description": "Enumerate attack surface of an Android application.",
+      "tools": [
+        "Drozer"
+      ],
+      "steps": [
+        "Command: `drozer agent discover`"
+      ],
+      "mcp_tools": [
+        "drozer_run"
+      ]
+    },
+    {
+      "id": "hiesen-mobile-testing-005",
+      "title": "iOS Runtime Manipulation with Cycript",
+      "description": "Interact with a running iOS process.",
+      "tools": [
+        "Cycript"
+      ],
+      "steps": [
+        "Command: `cycript -p <process_id>`"
+      ],
+      "mcp_tools": [
+        "cycript_run"
+      ]
+    },
+    {
+      "id": "hiesen-mobile-testing-006",
+      "title": "iOS Security Testing with Needle",
+      "description": "Perform various security checks on iOS applications.",
+      "tools": [
+        "Needle"
+      ],
+      "steps": [
+        "Command: `needle ios scanner --modules`"
+      ],
+      "mcp_tools": [
+        "needle_run"
+      ]
+    },
+    {
+      "id": "hiesen-mobile-testing-007",
+      "title": "Android backup/ADB data exfiltration",
+      "description": "Create logical backups or use ADB to pull app-private data, checking for sensitive information stored outside sandbox controls.",
+      "tools": [
+        "adb",
+        "Android Backup Extractor"
+      ],
+      "steps": [
+        "Enable developer mode/USB debugging on the test device or emulator.",
+        "Run `adb backup -noapk <package>` or `adb pull /data/data/<package>` (rooted) to acquire app data.",
+        "Use Android Backup Extractor / sqlite3 to inspect preferences, databases, and cached tokens.",
+        "Report plaintext secrets and recommend encrypted storage with KeyStore."
+      ],
+      "mcp_tools": []
+    },
+    {
+      "id": "hiesen-mobile-testing-008",
+      "title": "Android/iOS SSL pinning bypass validation",
+      "description": "Validate whether SSL/TLS pinning can be bypassed via Frida/Objection hooks, indicating weak certificate validation.",
+      "tools": [
+        "Frida",
+        "Objection"
+      ],
+      "steps": [
+        "Capture baseline traffic through Burp to confirm pinning/handshake failures.",
+        "Deploy Frida scripts or use Objection (`objection --gadget <pkg> explore --sslpinning disable`) to hook validation APIs.",
+        "Re-test traffic interception; success indicates pinning can be bypassed by malware/rooted users.",
+        "Recommend hardware-backed key attestation or multi-point validation."
+      ],
+      "mcp_tools": [
+        "frida_run",
+        "objection_run"
+      ]
+    },
+    {
+      "id": "hiesen-mobile-testing-009",
+      "title": "Jailbreak/root detection bypass",
+      "description": "Assess the robustness of jailbreak/root checks and whether they can be bypassed to unlock hidden functionality.",
+      "tools": [
+        "Frida",
+        "Objection",
+        "Magisk"
+      ],
+      "steps": [
+        "Trigger jailbreak/root detection by launching on a rooted/jailbroken device and note blocked actions.",
+        "Use Frida/Objection to hook detection methods (file checks, system property reads, JNI calls).",
+        "Demonstrate access to restricted features once bypassed and document the risk.",
+        "Recommend server-side attestation (SafetyNet/DeviceCheck) and layered detection mechanisms."
+      ],
+      "mcp_tools": [
+        "frida_run",
+        "objection_run"
+      ]
+    }
+  ]
+}
