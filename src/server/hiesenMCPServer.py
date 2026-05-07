@@ -55,6 +55,7 @@ logger = logging.getLogger(__name__)
 # Configuration
 COMMAND_TIMEOUT = 180  # 3 minutes default timeout for command execution
 API_PORT = int(os.environ.get("API_PORT", 1337)) # Default to 1337
+DOWNLOAD_WORDLISTS_ON_STARTUP = os.environ.get("HIESENMCP_DOWNLOAD_WORDLISTS", "").lower() in {"1", "true", "yes", "on"}
 
 app = Flask(__name__)
 
@@ -1268,7 +1269,11 @@ def main():
         app.debug = True
         logger.setLevel(logging.DEBUG)
 
-    _check_and_download_wordlists() # Call wordlist check/download
+    if DOWNLOAD_WORDLISTS_ON_STARTUP:
+        _check_and_download_wordlists()
+    else:
+        WORDLISTS_DIR.mkdir(parents=True, exist_ok=True)
+        logger.info("Skipping startup wordlist downloads. Set HIESENMCP_DOWNLOAD_WORDLISTS=1 to enable them.")
 
     logger.info(f"Starting HiesenMCP server on {args.host}:{args.port}...")
     app.run(host=args.host, port=args.port, debug=args.debug)

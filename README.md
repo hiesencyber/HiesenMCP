@@ -62,6 +62,11 @@ HiesenMCP/
     ```
     The server will be running on `http://localhost:1337`.
 
+    To download the larger optional wordlist repositories on startup:
+    ```bash
+    docker run -d -p 1337:1337 -e HIESENMCP_DOWNLOAD_WORDLISTS=1 --name hiesen-mcp-container hiesen-mcp
+    ```
+
 ### Server Setup (Manual)
 
 1.  **Clone the repository:**
@@ -125,6 +130,29 @@ curl -sS -X POST http://localhost:1337/api/command \
 
 To integrate HiesenMCP with your AI client, configure the client's MCP settings with the connection details for the HiesenMCP server.
 
+### LM Studio on Windows
+
+LM Studio on Windows can launch the MCP client inside the running Docker container, so you do not need to install Python dependencies on Windows:
+
+1.  Confirm the API container is running:
+    ```bash
+    docker ps --filter name=hiesen-mcp-container
+    ```
+
+2.  In LM Studio, open **Program > Install > Edit mcp.json**.
+
+3.  Add the contents of `docs/lmstudio-windows-mcp.json`.
+
+If Windows PowerShell cannot see the container but WSL can, use `docs/lmstudio-windows-wsl-mcp.json` instead.
+
+If LM Studio cannot find `docker`, replace `"command": "docker"` with the full path to `docker.exe`, for example:
+
+```json
+"command": "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe"
+```
+
+### Other MCP Clients
+
 1.  **Locate `connection.json`:** This file is typically found in the `docs/` directory of the HiesenMCP project.
     ```json
     {
@@ -132,9 +160,9 @@ To integrate HiesenMCP with your AI client, configure the client's MCP settings 
             "HiesenMCP": {
                 "command": "python3",
                 "args": [
-                    "<your-client-location>/src/client/hiesenMCPClient.py",
+                    "src/client/hiesenMCPClient.py",
                     "--server",
-                    "http://localhost:1337"
+                    "http://127.0.0.1:1337"
                 ]
             }
         }
@@ -144,7 +172,7 @@ To integrate HiesenMCP with your AI client, configure the client's MCP settings 
 2.  **Copy Configuration:** Copy the content of the `HiesenMCP` entry from `connection.json` into your AI client's MCP configuration. The exact location and format will depend on your AI client.
 
     **Important:**
-    - Replace `<your-client-location>` with the absolute path to your project root.
-    - Adjust the `--server` URL (`http://localhost:1337`) if your HiesenMCP server is running on a different IP address or port.
+    - Run this command from the project root, or replace `src/client/hiesenMCPClient.py` with an absolute path.
+    - Adjust the `--server` URL (`http://127.0.0.1:1337`) if your HiesenMCP server is running on a different IP address or port.
 
 This configuration allows your AI client to discover and utilize the tools exposed by the HiesenMCP server.
