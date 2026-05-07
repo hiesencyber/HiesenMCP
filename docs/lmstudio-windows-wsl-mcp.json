@@ -1,8 +1,14 @@
 {
     "mcpServers": {
         "HiesenMCP": {
-            "command": "python3",
+            "command": "wsl.exe",
             "args": [
+                "--",
+                "docker",
+                "exec",
+                "-i",
+                "hiesen-mcp-container",
+                "python3",
                 "src/client/hiesenMCPClient.py",
                 "--server",
                 "http://127.0.0.1:1337"
